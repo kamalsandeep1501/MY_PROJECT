@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/common/Navbar';
 import Sidebar from './components/common/Sidebar';
+import Card, { StatCard } from './components/common/Card';
 import {
   Activity,
   AlertOctagon,
@@ -93,59 +94,51 @@ export default function App() {
               </div>
             </div>
 
-            {/* Quick Metrics Cards */}
+            {/* Quick Metrics Cards using StatCard */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Network Health</span>
-                  <Activity className="h-4 w-4 text-emerald-400" />
-                </div>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-white">88.4%</span>
-                  <span className="text-xs font-medium text-emerald-400">Normal</span>
-                </div>
-                <p className="mt-1 text-xs text-slate-400">1,482 active supply chain nodes</p>
-              </div>
+              <StatCard
+                title="Network Health"
+                value="88.4%"
+                subtext="1,482 active supply chain nodes"
+                delta="Normal"
+                deltaType="positive"
+                icon={Activity}
+                iconBg="bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+              />
 
-              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Ripple Delay Risk</span>
-                  <TrendingUp className="h-4 w-4 text-amber-400" />
-                </div>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-white">+5.2d</span>
-                  <span className="text-xs font-medium text-amber-400">Moderate</span>
-                </div>
-                <p className="mt-1 text-xs text-slate-400">Avg delay propagation impact</p>
-              </div>
+              <StatCard
+                title="Ripple Delay Risk"
+                value="+5.2d"
+                subtext="Avg delay propagation impact"
+                delta="Moderate"
+                deltaType="warning"
+                icon={TrendingUp}
+                iconBg="bg-amber-500/10 text-amber-400 border-amber-500/20"
+              />
 
-              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Active Disruptions</span>
-                  <AlertOctagon className="h-4 w-4 text-rose-400" />
-                </div>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-white">7</span>
-                  <span className="text-xs font-medium text-rose-400">3 Critical</span>
-                </div>
-                <p className="mt-1 text-xs text-slate-400">Extracted from global news feeds</p>
-              </div>
+              <StatCard
+                title="Active Disruptions"
+                value="7"
+                subtext="Extracted from global news feeds"
+                delta="3 Critical"
+                deltaType="negative"
+                icon={AlertOctagon}
+                iconBg="bg-rose-500/10 text-rose-400 border-rose-500/20"
+              />
 
-              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm">
-                <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-xs font-semibold uppercase tracking-wider">GNN Multi-Hop Depth</span>
-                  <Network className="h-4 w-4 text-cyan-400" />
-                </div>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-white">3 Hops</span>
-                  <span className="text-xs font-medium text-cyan-400">Tier 1 → Tier 3</span>
-                </div>
-                <p className="mt-1 text-xs text-slate-400">PyTorch Geometric trained</p>
-              </div>
+              <StatCard
+                title="GNN Multi-Hop Depth"
+                value="3 Hops"
+                subtext="PyTorch Geometric trained"
+                delta="Tier 1 → Tier 3"
+                deltaType="neutral"
+                icon={Network}
+                iconBg="bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
+              />
             </div>
 
-            {/* Active Tab Content Area */}
-            <div className="rounded-2xl border border-slate-800/80 bg-slate-900/40 p-6 min-h-[360px] flex flex-col justify-center items-center text-center">
+            {/* Active Tab Content Area using Card */}
+            <Card variant="glass" padding="lg" className="min-h-[360px] flex flex-col justify-center items-center text-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 mb-4">
                 {activeTab === 'dashboard' && <Activity className="h-8 w-8" />}
                 {activeTab === 'graph' && <Share2 className="h-8 w-8" />}
@@ -155,13 +148,13 @@ export default function App() {
                   <Layers className="h-8 w-8" />
                 )}
               </div>
-              <h2 className="text-lg font-semibold text-white capitalize">
+              <Card.Title as="h2" className="text-lg font-semibold text-white capitalize justify-center">
                 {activeTab} Module Loaded
-              </h2>
-              <p className="text-sm text-slate-400 max-w-md mt-1">
-                Navbar and Sidebar components are fully responsive and functional. Selecting items in the sidebar updates navigation context and interactive states.
-              </p>
-            </div>
+              </Card.Title>
+              <Card.Description className="max-w-md mt-1">
+                Navbar, Sidebar, and Card components are fully modular, typed, and integrated into the design system.
+              </Card.Description>
+            </Card>
 
           </div>
         </main>
